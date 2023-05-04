@@ -5,4 +5,4 @@ def elapsed_time(start_time, end_time):
 
     # Print the elapsed time
     print(
-        f"[Elapsed time] {int(elapsed_time_minutes)} minutes and {int(elapsed_time_seconds)} seconds")
+        f"[Elapsed time] {int(elapsed_time_minutes)} minutes and {int(elapsed_time_seconds)} seconds \n")
