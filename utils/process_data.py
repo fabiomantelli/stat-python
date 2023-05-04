@@ -1,4 +1,5 @@
-from bad_status_flags import bad_status_flags
+from utils.bad_status_flags import bad_status_flags
+
 
 def process_data(my_dict):
     status_flags = []
@@ -21,5 +22,3 @@ def process_data(my_dict):
 
         current_status_flags = item
     return status_flags
-
-
