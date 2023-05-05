@@ -10,16 +10,16 @@ from utils.elapsed_time import elapsed_time
 
 from models.ppa_status_flags import ppa_status_flags
 
-date = '05-03-23'
+# date = '05-03-23'
 today = datetime.today()
 yesterday = today - timedelta(days=1)
 formatted_yesterday = yesterday.strftime("%m-%d-%y")
 
 server = '150.162.19.214'
-startTime = f'{date} 18:45:00.000'
-endTime = f'{date} 18:48:00.000'
-# startTime = f'{formatted_yesterday} 00:00:00.000'
-# endTime = f'{formatted_yesterday} 23:59:59.999'
+# startTime = f'{date} 18:45:00.000'
+# endTime = f'{date} 18:48:00.000'
+startTime = f'{formatted_yesterday} 00:00:00.000'
+endTime = f'{formatted_yesterday} 23:59:59.999'
 
 for item in ppa_status_flags:
     start_time = time.time()
@@ -36,8 +36,8 @@ for item in ppa_status_flags:
 
         status_flags = process_data(my_dict)
         print(f'[{pmu.upper()}] status_flags: {status_flags}')
-        create_excel_file(date)
-        export_data_into_excel(status_flags, pmu, date)
+        create_excel_file(formatted_yesterday)
+        export_data_into_excel(status_flags, pmu, formatted_yesterday)
 
     else:
         print(f"Error: Failed to retrieve data from {url}")
