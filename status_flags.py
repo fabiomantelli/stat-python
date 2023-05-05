@@ -17,7 +17,7 @@ today = datetime.today()
 yesterday = today - timedelta(days=1)
 formatted_yesterday = yesterday.strftime("%m-%d-%y")
 
-server_name = "ons_pdcmi_bsb"
+server_name = "brazil"
 server = get_server(server_name)
 
 if server is None:
@@ -45,7 +45,8 @@ else:
             status_flags = process_data(my_dict)
             print(f'[{pmu.upper()}] status_flags: {status_flags}')
             create_excel_file(formatted_yesterday)
-            export_data_into_excel(status_flags, pmu, formatted_yesterday, server_name)
+            export_data_into_excel(
+                status_flags, pmu, formatted_yesterday, server_name)
 
         else:
             print(f"Error: Failed to retrieve data from {url}")
