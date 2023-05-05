@@ -1,7 +1,7 @@
 import unittest
 from utils.good_status_flags import good_status_flags
 
-class TestProcessData(unittest.TestCase):
+class TestGoodStatusFlags(unittest.TestCase):
     
     def test_good_status_flags_if_data_error(self):
         data = 557056
