@@ -5,7 +5,7 @@ from openpyxl import Workbook
 from utils.header_in_excel import header_in_excel
 
 
-def export_data_into_excel(status_flags, pmu, date):
+def export_data_into_excel(status_flags, pmu, date, server_name):
     parts = date.split("-")
 
     # Extract the day and month values from the parts list
@@ -13,7 +13,7 @@ def export_data_into_excel(status_flags, pmu, date):
     month = parts[0]
 
     try:
-        file_name = f"./data/{year}_{month}_medfasee_status_flags.xlsx"
+        file_name = f"./data/{year}_{month}_medfasee_{server_name}_status_flags.xlsx"
         workbook = openpyxl.load_workbook(file_name)
     except FileNotFoundError:
         workbook = Workbook()
