@@ -44,7 +44,7 @@ else:
 
             status_flags = process_data(my_dict)
             print(f'[{pmu.upper()}] status_flags: {status_flags}')
-            create_excel_file(formatted_yesterday)
+            create_excel_file(formatted_yesterday, server_name)
             export_data_into_excel(
                 status_flags, pmu, formatted_yesterday, server_name)
 
