@@ -3,3 +3,4 @@ time_pairs.xlsx
 vscode/
 __pycache__
 .vscode
+.DS_Store
