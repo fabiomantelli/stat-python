@@ -40,9 +40,9 @@ else:
 
         if response.status_code == 200:
             data = response.text
-            my_dict = json.loads(data)
+            data_json = json.loads(data)
 
-            status_flags = process_data(my_dict)
+            status_flags = process_data(data_json)
             print(f'[{pmu.upper()}] status_flags: {status_flags}')
             create_excel_file(formatted_yesterday, server_name)
             export_data_into_excel(
