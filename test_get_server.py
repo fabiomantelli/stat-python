@@ -1,4 +1,5 @@
 import unittest
+
 from utils.get_servers import get_server
 
 class TestGetServer(unittest.TestCase):
@@ -17,3 +18,4 @@ class TestGetServer(unittest.TestCase):
         name = "brazil"
         result = get_server(name)
         self.assertEqual(result, "150.162.19.214")
+
