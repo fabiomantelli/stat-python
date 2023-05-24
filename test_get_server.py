@@ -1,5 +1,4 @@
 import unittest
-
 from utils.get_servers import get_server
 
 class TestGetServer(unittest.TestCase):

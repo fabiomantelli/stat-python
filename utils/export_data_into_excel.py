@@ -2,7 +2,9 @@ import datetime
 import openpyxl
 from openpyxl import Workbook
 
+
 from utils.header_in_excel import header_in_excel
+
 
 
 def export_data_into_excel(status_flags, pmu, date, server_name):
@@ -20,18 +22,19 @@ def export_data_into_excel(status_flags, pmu, date, server_name):
 
     if status_flags == []:
         return
-
+            
     worksheet_exists = pmu in workbook.sheetnames
-
+    
     if worksheet_exists:
         worksheet = workbook[pmu]
     else:
-        worksheet = workbook.create_sheet(pmu)
+        worksheet = workbook.create_sheet(pmu)        
 
     header_in_excel(worksheet, pmu)
-
+       
+     
     workbook.save(file_name)
-
+    
     last_row = worksheet.max_row
     while worksheet.cell(row=last_row, column=2).value is None:
         last_row -= 1
@@ -50,7 +53,7 @@ def export_data_into_excel(status_flags, pmu, date, server_name):
         new_line = last_row + row_increment
         worksheet.insert_rows(new_line)
         worksheet.cell(row=new_line, column=1).value = last_row-2+row_increment
-        worksheet.cell(row=new_line, column=2).value = date
+        worksheet.cell(row=new_line, column=2).value = datetime.datetime.strptime(date, '%m-%d-%y').strftime('%d/%m/%Y')
         worksheet.cell(row=new_line, column=3).value = hex(
             status_flags[i]['Value'])[2:].upper()
         worksheet.cell(row=new_line, column=4).value = binary_with_spaces
@@ -79,11 +82,12 @@ def export_data_into_excel(status_flags, pmu, date, server_name):
 
         # set cell format in Excel
         cell_initial_time = worksheet.cell(row=new_line, column=5)
-        cell_initial_time.number_format = "h:mm:ss.000"
-        cell_final_time = worksheet.cell(row=new_line, column=6)
-        cell_final_time.number_format = "h:mm:ss.000"
-        cell_period = worksheet.cell(row=new_line, column=7)
-        cell_period.number_format = "h:mm:ss.000"
+        cell_initial_time.number_format = "h:mm:ss.000" 
+
+    
         row_increment += 1
 
         workbook.save(file_name)
+   
+    
+   
