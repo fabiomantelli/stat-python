@@ -9,12 +9,14 @@ from utils.export_data_into_excel import export_data_into_excel
 from utils.create_excel_file import create_excel_file
 from utils.elapsed_time import elapsed_time
 from utils.get_servers import get_server
-from utils.formatting import formatting
+from utils.summary_pmu import summary_pmu
+from utils.update_síntese import update_síntese
+from utils.format_workbook import format_workbook
 
 
 from models.ppa_status_flags import ppa_status_flags
 
-date = '05-12-23'
+date = '03-09-23'
 today = datetime.today()
 yesterday = today - timedelta(days=1)
 formatted_yesterday = yesterday.strftime("%m-%d-%y")
@@ -26,16 +28,14 @@ if server is None:
     print(f"There is no {server_name} in ppa_status_flags.")
     sys.exit()
 else:
-    startTime = f'{date} 00:44:00.000'
-    endTime = f'{date} 00:45:00.000'
-    #startTime = f'{date} 00:00:00.000'
-    #endTime = f'{date} 23:59:59.000'
+    startTime = f'{date} 15:25:00.000'
+    endTime = f'{date} 15:27:00.000'    
     #startTime = f'{formatted_yesterday} 00:00:00.000'
     #endTime = f'{formatted_yesterday} 23:59:59.999'
 
     for item in ppa_status_flags[server_name]['ppa']:
         start_time = time.time()
-
+        
         pmu = item['pmu']
         statusFlags = item['statusFlags']
 
@@ -64,4 +64,6 @@ else:
     for item in ppa_status_flags[server_name]['ppa']:
         if 'pmu' in item:
             pmu = item['pmu']
-            formatting(pmu, date, server_name)
+            summary_pmu(pmu, date, server_name) 
+            update_síntese(pmu, date, server_name)           
+            format_workbook(pmu, date, server_name)
