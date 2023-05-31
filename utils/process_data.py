@@ -3,6 +3,7 @@ from utils.good_status_flags import good_status_flags
 
 def process_data(data_json):
     status_flags = []
+    current_status_flags = None
     flag = False
 
     for i, item in enumerate(data_json['TimeSeriesDataPoints']):
@@ -33,4 +34,5 @@ def process_data(data_json):
             status_flags.append(item)
 
         current_status_flags = item
+
     return status_flags
