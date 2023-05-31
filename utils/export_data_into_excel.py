@@ -4,18 +4,13 @@ from openpyxl import Workbook
 
 
 from utils.header_in_excel import header_in_excel
-
+from utils.create_file_name import create_file_name
 
 
 def export_data_into_excel(status_flags, pmu, date, server_name):
-    parts = date.split("-")
 
-    # Extract the day and month values from the parts list
-    year = parts[2]
-    month = parts[0]
-
-    try:
-        file_name = f"./data/{year}_{month}_medfasee_{server_name}_status_flags.xlsx"
+    file_name = create_file_name(date, server_name)
+    try:        
         workbook = openpyxl.load_workbook(file_name)
     except FileNotFoundError:
         workbook = Workbook()
