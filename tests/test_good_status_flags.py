@@ -17,3 +17,8 @@ class TestGoodStatusFlags(unittest.TestCase):
         data = 0
         result = good_status_flags(data)
         self.assertEqual(result, True)
+
+    def test_good_status_flags_if_pmu_error(self):
+        data = 909312
+        result = good_status_flags(data)
+        self.assertEqual(result, True)

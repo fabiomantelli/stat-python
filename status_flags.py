@@ -17,7 +17,7 @@ today = datetime.today()
 yesterday = today - timedelta(days=1)
 formatted_yesterday = yesterday.strftime("%m-%d-%y")
 
-server_name = "brazil"
+server_name = "ons_pdcmi_bsb"
 server = get_server(server_name)
 
 if server is None:
