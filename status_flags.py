@@ -55,15 +55,14 @@ else:
         else:
             print(f"Error: Failed to retrieve data from {url}")
 
+        summary_pmu(pmu, date, server_name) 
+        update_síntese(pmu, date, server_name)           
+        format_workbook(pmu, date, server_name)
+
         end_time = time.time()
         elapsed_time(start_time, end_time)
-
+    
         # wait before making the next request
         time.sleep(1)
 
-    for item in ppa_status_flags[server_name]['ppa']:
-        if 'pmu' in item:
-            pmu = item['pmu']
-            summary_pmu(pmu, date, server_name) 
-            update_síntese(pmu, date, server_name)           
-            format_workbook(pmu, date, server_name)
+    
