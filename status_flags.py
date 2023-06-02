@@ -16,20 +16,20 @@ from utils.format_workbook import format_workbook
 
 from models.ppa_status_flags import ppa_status_flags
 
-date = '03-09-23'
+date = '05-12-23'
 today = datetime.today()
 yesterday = today - timedelta(days=1)
 formatted_yesterday = yesterday.strftime("%m-%d-%y")
 
-server_name = "ons_pdcmi_bsb"
+server_name = "brazil"
 server = get_server(server_name)
 
 if server is None:
     print(f"There is no {server_name} in ppa_status_flags.")
     sys.exit()
 else:
-    startTime = f'{date} 15:25:00.000'
-    endTime = f'{date} 15:27:00.000'    
+    startTime = f'{date} 20:51:51.600'
+    endTime = f'{date} 20:51:54.000'    
     #startTime = f'{formatted_yesterday} 00:00:00.000'
     #endTime = f'{formatted_yesterday} 23:59:59.999'
 

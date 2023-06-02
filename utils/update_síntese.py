@@ -10,18 +10,18 @@ def update_síntese(pmu, date, server_name):
     if not worksheet:
         return
 
-    freq_DE1F0, periodo_medio_DE1F0, periodo_total_DE1F0 = get_cell_values(worksheet, "DE1F0")
-    freq_DE040, periodo_medio_DE040, periodo_total_DE040 = get_cell_values(worksheet, "DE040")
-    freq_DE000, periodo_medio_DE000, periodo_total_DE000 = get_cell_values(worksheet, "DE000")
+    freq_DE1F0, average_period_DE1F0, total_period_DE1F0 = get_cell_values(worksheet, "DE1F0")
+    freq_DE040, average_period_DE040, total_period_DE040 = get_cell_values(worksheet, "DE040")
+    freq_DE000, average_period_DE000, total_period_DE000 = get_cell_values(worksheet, "DE000")
 
-    status_flags_diferente, freq_status_flags_diferente, periodo_medio_status_flags_diferente, periodo_total_status_flags_diferente = get_status_flags_diferente(worksheet)
+    status_different_flags, frequency_status_different_flags, medium_period_different_status_flags, total_period_different_status_flags = get_status_flags_diff(worksheet)
 
     workbook.save(file_name)
     
-    write_síntese(workbook, pmu, freq_DE1F0, periodo_medio_DE1F0, periodo_total_DE1F0, freq_DE040,
-                             periodo_medio_DE040, periodo_total_DE040, freq_DE000, periodo_medio_DE000,
-                             periodo_total_DE000, freq_status_flags_diferente, periodo_medio_status_flags_diferente,
-                             periodo_total_status_flags_diferente, server_name, date)
+    write_síntese(workbook, pmu, freq_DE1F0, average_period_DE1F0, total_period_DE1F0, freq_DE040,
+                             average_period_DE040, total_period_DE040, freq_DE000,average_period_DE000, total_period_DE000, 
+                             status_different_flags, frequency_status_different_flags, medium_period_different_status_flags, 
+                             total_period_different_status_flags, server_name, date)
 
 
 def get_worksheet(workbook, pmu):
@@ -55,50 +55,51 @@ def get_cell_values(worksheet, cell_value):
     return freq, periodo_medio, periodo_total
 
 
-def get_status_flags_diferente(worksheet):
-    status_flags_diferente = 0
-    column = worksheet['I']
-    # Verificar se há valores diferentes de "DE1F0", "DE040" e "DE000" na coluna
+def get_status_flags_diff(worksheet):
+    status_flags_diff = 0
+    column = worksheet['I']    
     for cell in column:
         if cell.value and cell.value not in ['DE1F0', 'DE040', 'DE000', 'Status Flag']:
-            status_flags_diferente = cell.value
+            status_flags_diff = cell.value
             break
 
-    freq_status_flags_diferente, periodo_medio_status_flags_diferente, periodo_total_status_flags_diferente = 0, 0, 0
+    freq_status_flags_diff, average_period_status_flags_diff, total_period_status_flags_diff = 0, 0, 0
 
-    status_flags_diferente_cell = find_cell_value(worksheet, status_flags_diferente, 9)
-    if status_flags_diferente_cell is not None:
-        status_flags_diferente_col = status_flags_diferente_cell.column
-        status_flags_diferente_row = status_flags_diferente_cell.row
-        freq_status_flags_diferente = worksheet.cell(row=status_flags_diferente_row, column=status_flags_diferente_col + 1).value
-        periodo_medio_status_flags_diferente = worksheet.cell(row=status_flags_diferente_row, column=status_flags_diferente_col + 2).value
-        periodo_total_status_flags_diferente = worksheet.cell(row=status_flags_diferente_row, column=status_flags_diferente_col + 3).value
+    status_flags_diff_cell = find_cell_value(worksheet, status_flags_diff, 9)
+    if status_flags_diff_cell is not None:
+        status_flags_diff_col = status_flags_diff_cell.column
+        status_flags_diff_row = status_flags_diff_cell.row
+        freq_status_flags_diff = worksheet.cell(row=status_flags_diff_row, column=status_flags_diff_col + 1).value
+        average_period_status_flags_diff = worksheet.cell(row=status_flags_diff_row, column=status_flags_diff_col + 2).value
+        total_period_status_flags_diff = worksheet.cell(row=status_flags_diff_row, column=status_flags_diff_col + 3).value
 
-    return status_flags_diferente, freq_status_flags_diferente, periodo_medio_status_flags_diferente, periodo_total_status_flags_diferente
+    return status_flags_diff, freq_status_flags_diff, average_period_status_flags_diff, total_period_status_flags_diff
 
 
-def write_síntese(workbook, pmu, freq_DE1F0, periodo_medio_DE1F0, periodo_total_DE1F0, freq_DE040,
-                             periodo_medio_DE040, periodo_total_DE040, freq_DE000, periodo_medio_DE000,
-                             periodo_total_DE000, freq_status_flags_diferente, periodo_medio_status_flags_diferente,
-                             periodo_total_status_flags_diferente, server_name, date):
-    worksheet1 = workbook['Síntese']
-    worksheet_exists = 'Síntese' in workbook.sheetnames
+
+def write_summary(workbook, pmu, freq_DE1F0, average_period_DE1F0, total_period_DE1F0, freq_DE040,
+                  average_period_DE040, total_period_DE040, freq_DE000, average_period_DE000,
+                  total_period_DE000, freq_status_flags_diff, average_period_status_flags_diff,
+                  total_period_status_flags_diff, server_name, date):
+    worksheet1 = workbook['Summary']
+    worksheet_exists = 'Summary' in workbook.sheetnames
 
     if worksheet_exists:
-        identificacao = find_cell_value(worksheet1, pmu, 3)
-        identificacao_col = identificacao.column
-        identificacao_row = identificacao.row
-        worksheet1.cell(row=identificacao_row, column=identificacao_col + 1).value = freq_DE1F0
-        worksheet1.cell(row=identificacao_row, column=identificacao_col + 2).value = periodo_medio_DE1F0
-        worksheet1.cell(row=identificacao_row, column=identificacao_col + 3).value = periodo_total_DE1F0
-        worksheet1.cell(row=identificacao_row, column=identificacao_col + 4).value = freq_DE040
-        worksheet1.cell(row=identificacao_row, column=identificacao_col + 5).value = periodo_medio_DE040
-        worksheet1.cell(row=identificacao_row, column=identificacao_col + 6).value = periodo_total_DE040
-        worksheet1.cell(row=identificacao_row, column=identificacao_col + 7).value = freq_DE000
-        worksheet1.cell(row=identificacao_row, column=identificacao_col + 8).value = periodo_medio_DE000
-        worksheet1.cell(row=identificacao_row, column=identificacao_col + 9).value = periodo_total_DE000
-        worksheet1.cell(row=identificacao_row, column=identificacao_col + 10).value = freq_status_flags_diferente
-        worksheet1.cell(row=identificacao_row, column=identificacao_col + 11).value = periodo_medio_status_flags_diferente
-        worksheet1.cell(row=identificacao_row, column=identificacao_col + 12).value = periodo_total_status_flags_diferente
+        identification = find_cell_value(worksheet1, pmu, 3)
+        identification_col = identification.column
+        identification_row = identification.row
+        worksheet1.cell(row=identification_row, column=identification_col + 1).value = freq_DE1F0
+        worksheet1.cell(row=identification_row, column=identification_col + 2).value = average_period_DE1F0
+        worksheet1.cell(row=identification_row, column=identification_col + 3).value = total_period_DE1F0
+        worksheet1.cell(row=identification_row, column=identification_col + 4).value = freq_DE040
+        worksheet1.cell(row=identification_row, column=identification_col + 5).value = average_period_DE040
+        worksheet1.cell(row=identification_row, column=identification_col + 6).value = total_period_DE040
+        worksheet1.cell(row=identification_row, column=identification_col + 7).value = freq_DE000
+        worksheet1.cell(row=identification_row, column=identification_col + 8).value = average_period_DE000
+        worksheet1.cell(row=identification_row, column=identification_col + 9).value = total_period_DE000
+        worksheet1.cell(row=identification_row, column=identification_col + 10).value = freq_status_flags_diff
+        worksheet1.cell(row=identification_row, column=identification_col + 11).value = average_period_status_flags_diff
+        worksheet1.cell(row=identification_row, column=identification_col + 12).value = total_period_status_flags_diff
 
     workbook.save(create_file_name(date, server_name))
+

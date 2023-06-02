@@ -27,9 +27,9 @@ def summary_pmu(pmu, date, server_name):
         formatted_duration = durations["formatted_duration"]
         worksheet.cell(row=3 + list(element_durations.keys()).index(element), column=11).value = formatted_duration
 
-    valores_unicos = get_unique_values(worksheet)
-    valores_e_frequencias = calculate_value_frequencies(worksheet, valores_unicos)
-    write_value_frequencies(worksheet, valores_e_frequencias)
+    unique_values = get_unique_values(worksheet)
+    values_and_frequencies = calculate_value_frequencies(worksheet, unique_values)
+    write_value_frequencies(worksheet, values_and_frequencies)
 
     workbook.save(file_name)
        
@@ -100,30 +100,30 @@ def calculate_average_duration(element_durations):
     return element_durations
 
 def get_unique_values(worksheet):
-    valores_unicos = set()
+    unique_values = set()
     for row in worksheet.iter_rows(min_row=3, min_col=3, values_only=True):
-        valores_unicos.add(row[0])
-    return valores_unicos
+        unique_values.add(row[0])
+    return unique_values
 
-def calculate_value_frequencies(worksheet, valores_unicos):
-    valores_e_frequencias = {}
-    for valor in valores_unicos:
+def calculate_value_frequencies(worksheet, unique_values):
+    values_and_frequencies = {}
+    for valor in unique_values:
         frequencia = 0
         for row in worksheet.iter_rows(min_row=3, min_col=3, values_only=True):
             if row[0] == valor:
                 frequencia += 1
-        valores_e_frequencias[valor] = frequencia
-    return valores_e_frequencias
+        values_and_frequencies[valor] = frequencia
+    return values_and_frequencies
 
-def write_value_frequencies(worksheet, valores_e_frequencias):
+def write_value_frequencies(worksheet, values_and_frequencies):
     cont = 0
     for row in worksheet.iter_rows(min_row=3):
         valor = row[2].value
-        frequencia = valores_e_frequencias[valor]
+        frequencia = values_and_frequencies[valor]
         row[8].value = valor
         row[9].value = frequencia
         cont += 1
-        if cont == len(valores_e_frequencias):
+        if cont == len(values_and_frequencies):
             break
    
 
