@@ -4,7 +4,6 @@ from openpyxl.styles.alignment import Alignment
 FIRST_LINE=1
 FIRST_COLUMN=1
 LAST_COLUMN=7
-
 def header_in_excel(worksheet, pmu):
     worksheet.merge_cells(start_row=FIRST_LINE, end_row=FIRST_LINE, start_column=FIRST_LINE, end_column=LAST_COLUMN)
     worksheet.cell(row=1, column=1, value=pmu)
