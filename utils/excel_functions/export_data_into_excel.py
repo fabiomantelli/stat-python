@@ -14,8 +14,8 @@ def export_data_into_excel(status_flags, pmu, date, server_name):
     if not status_flags:
         return
     try:
-        file_name = f"./data/{year}_{month}_medfasee_{server_name}_status_flags.xlsx"
-        workbook = openpyxl.load_workbook(file_name)
+        excel_file_name = f"./data/{year}_{month}_medfasee_{server_name}_status_flags.xlsx"
+        workbook = openpyxl.load_workbook(excel_file_name)
     except FileNotFoundError:
         workbook = Workbook()
     try:
@@ -42,5 +42,5 @@ def export_data_into_excel(status_flags, pmu, date, server_name):
     AVERAGE_PERIOD_COLUMN = 11
     average_period = get_average_period(worksheet)
     worksheet.cell(row=3, column=AVERAGE_PERIOD_COLUMN).value = average_period
-    workbook.save(file_name)
+    workbook.save(excel_file_name)
 
