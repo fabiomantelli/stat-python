@@ -13,7 +13,7 @@ def get_period_time_of_status_flags(worksheet, status_flags, date):
     increment_by_two = range(0, len(status_flags), 2)
     for line_number, item in enumerate(increment_by_two, start=last_row + 1):
         worksheet.insert_rows(line_number)
-        worksheet.cell(row=line_number, column=1).value = line_number
+        worksheet.cell(row=line_number, column=1).value = line_number - 2
         worksheet.cell(row=line_number, column=2).value = datetime.datetime.strptime(
             date, '%m-%d-%y').strftime('%d/%m/%Y')
         worksheet.cell(row=line_number, column=3).value = hex(
