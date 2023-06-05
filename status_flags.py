@@ -9,8 +9,6 @@ from utils.excel_functions.export_data_into_excel import export_data_into_excel
 from utils.excel_functions.create_excel_file import create_excel_file
 from utils.elapsed_time import elapsed_time
 from utils.get_servers import get_server
-from utils.formatting import formatting
-
 
 from models.ppa_status_flags import ppa_status_flags
 
@@ -48,11 +46,10 @@ else:
 
             status_flags = process_data(data_json)
             print(f'[{pmu.upper()}] status_flags: {status_flags}')
+
             create_excel_file(date, server_name)
             export_data_into_excel(
                 status_flags, pmu, date, server_name)
-            # formatting(pmu, date, server_name)
-
         else:
             print(f"Error: Failed to retrieve data from {url}")
 
