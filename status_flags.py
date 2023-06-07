@@ -12,7 +12,7 @@ from utils.get_servers import get_server
 
 from models.ppa_status_flags import ppa_status_flags
 
-date = '05-12-23'
+date = '06-03-23'
 today = datetime.today()
 yesterday = today - timedelta(days=1)
 formatted_yesterday = yesterday.strftime("%m-%d-%y")
@@ -23,38 +23,36 @@ server = get_server(server_name)
 if server is None:
     print(f"There is no {server_name} in ppa_status_flags.")
     sys.exit()
-else:
-    startTime = f'{date} 00:44:00.000'
-    endTime = f'{date} 00:45:00.000'
-    # startTime = f'{date} 00:00:00.000'
-    # endTime = f'{date} 00:01:59.000'
-    # startTime = f'{formatted_yesterday} 00:00:00.000'
-    # endTime = f'{formatted_yesterday} 23:59:59.999'
 
-    for item in ppa_status_flags[server_name]['ppa']:
-        start_time = time.time()
+start_time = f'{date} 00:00:00.000'
+end_time = f'{date} 00:01:59.000'
+#start_time = f'{formatted_yesterday} 00:00:00.000'
+#end_time = f'{formatted_yesterday} 23:59:59.999'
 
-        pmu = item['pmu']
-        statusFlags = item['statusFlags']
+for item in ppa_status_flags[server_name]['ppa']:
+    request_start_time = time.time()
 
-        url = f'http://{server}:6152/historian/timeseriesdata/read/historic/{statusFlags}/{startTime}/{endTime}/json'
-        response = requests.get(url)
+    pmu = item['pmu']
+    statusFlags = item['statusFlags']
 
-        if response.status_code == 200:
-            data = response.text
-            data_json = json.loads(data)
+    url = f'http://{server}:6152/historian/timeseriesdata/read/historic/{statusFlags}/{start_time}/{end_time}/json'
+    response = requests.get(url)
 
-            status_flags = process_data(data_json)
-            print(f'[{pmu.upper()}] status_flags: {status_flags}')
+    REQUEST_SUCCEEDED = 200
+    if response.status_code == REQUEST_SUCCEEDED:
+        data = response.text
+        data_json = json.loads(data)
 
-            create_excel_file(date, server_name)
-            export_data_into_excel(
-                status_flags, pmu, date, server_name)
-        else:
-            print(f"Error: Failed to retrieve data from {url}")
+        status_flags = process_data(data_json)
+        print(f'[{pmu.upper()}] status_flags: {status_flags}')
 
-        end_time = time.time()
-        elapsed_time(start_time, end_time)
+        create_excel_file(date, server_name)
+        export_data_into_excel(
+            status_flags, pmu, date, server_name)
+    else:
+        print(f"Error: Failed to retrieve data from {url}")
 
-        # wait before making the next request
-        time.sleep(1)
+    request_end_time = time.time()
+    elapsed_time(request_start_time, request_end_time)
+
+    time.sleep(1)
