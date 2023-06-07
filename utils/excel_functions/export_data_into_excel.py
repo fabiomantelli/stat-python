@@ -7,7 +7,7 @@ from .get_total_duration_of_status_flags import get_total_duration_of_status_fla
 from .get_period_time_of_status_flags import get_period_time_of_status_flags
 from .get_average_period import get_average_period
 from utils.get_total_items_in_a_excel_column import get_total_items_in_an_excel_column
-from .set_summary_header import set_summary_header
+from .export_data_into_summary_header import export_data_into_summary_header
 
 def export_data_into_excel(status_flags, pmu, date, server_name):
     month, day, year = date.split("-")
@@ -15,7 +15,7 @@ def export_data_into_excel(status_flags, pmu, date, server_name):
     if not status_flags:
         return
     try:
-        excel_file_name = f"./data/{year}_{month}_medfasee_{server_name}_status_flags.xlsx"
+        excel_file_name = f"./data/{year}_{month}_{server_name}_status_flags.xlsx"
         workbook = openpyxl.load_workbook(excel_file_name)
     except FileNotFoundError:
         workbook = Workbook()
@@ -34,10 +34,12 @@ def export_data_into_excel(status_flags, pmu, date, server_name):
     worksheet.cell(row=3, column=TOTAL_PERIOD_COLUMN).value = total_duration_of_status_flags
 
     STATUS_FLAGS_HEX_COLUMN = 3
-    STATUS_FLAGS_COLUMN = 9
-    FREQUENCY_COLUMN = 10
     most_common_status_flags, amount_of_status_flags  = get_total_items_in_an_excel_column(worksheet, STATUS_FLAGS_HEX_COLUMN)
+    
+    STATUS_FLAGS_COLUMN = 9
     worksheet.cell(row=3, column=STATUS_FLAGS_COLUMN).value = most_common_status_flags
+    
+    FREQUENCY_COLUMN = 10
     worksheet.cell(row=3, column=FREQUENCY_COLUMN).value = amount_of_status_flags
 
     AVERAGE_PERIOD_COLUMN = 11
@@ -45,7 +47,7 @@ def export_data_into_excel(status_flags, pmu, date, server_name):
     worksheet.cell(row=3, column=AVERAGE_PERIOD_COLUMN).value = average_period
 
     sintese_worsheet = workbook['Síntese']
-    set_summary_header(sintese_worsheet)
+    export_data_into_summary_header(worksheet, sintese_worsheet, pmu)
 
     workbook.save(excel_file_name)
     
