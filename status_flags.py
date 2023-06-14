@@ -17,17 +17,17 @@ today = datetime.today()
 yesterday = today - timedelta(days=1)
 formatted_yesterday = yesterday.strftime("%m-%d-%y")
 
-server_name = "brazil"
+server_name = "ons_pdcmi_bsb"
 server = get_server(server_name)
 
 if server is None:
     print(f"There is no {server_name} in ppa_status_flags.")
     sys.exit()
 
-start_time = f'{date} 00:00:00.000'
-end_time = f'{date} 00:01:59.000'
-#start_time = f'{formatted_yesterday} 00:00:00.000'
-#end_time = f'{formatted_yesterday} 23:59:59.999'
+#start_time = f'{date} 00:00:00.000'
+#end_time = f'{date} 00:01:59.000'
+start_time = f'{formatted_yesterday} 00:00:00.000'
+end_time = f'{formatted_yesterday} 23:59:59.999'
 
 for item in ppa_status_flags[server_name]['ppa']:
     request_start_time = time.time()
