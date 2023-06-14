@@ -1,5 +1,6 @@
 venv/
 vscode/
+htmlcov/
 __pycache__
 .vscode
 .DS_Store
