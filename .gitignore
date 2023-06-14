@@ -3,6 +3,8 @@ vscode/
 htmlcov/
 __pycache__
 .vscode
-.DS_Store
 data/
 !data/model.xlsx
+.coverage
+.DS_Store
+**/.DS_Store
