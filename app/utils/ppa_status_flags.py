@@ -52,5 +52,13 @@ ppa_status_flags = {
             {'id': 10701, 'pmu': 'SCCNO_525_PM_03',
                 'statusFlags': 3586, 'agent': 'TBE'},
         ]
+    },
+    'pdc_aws': {
+        'ip': '54.207.18.19',
+        'ppa': [
+            {'id': 3, 'pmu': 'unifei', 'statusFlags': 1312},
+            {'id': 17, 'pmu': 'ufma', 'statusFlags': 718},
+            {'id': 22, 'pmu': 'ufam', 'statusFlags': 518},
+        ]
     }
 }
