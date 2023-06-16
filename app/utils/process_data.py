@@ -1,28 +1,28 @@
-from .good_status_flags import good_status_flags
+from .status_flags_handler import status_flags_handler
 
 def process_data(data_json):
     status_flags = []
-    current_status_flags = None
-    flag = False
+    previous_status_flag = None
+    previous_good_status_flag = True
+    
     for i, item in enumerate(data_json['TimeSeriesDataPoints']):
-        value = item['Value']
-        filtered_value = good_status_flags(value)
-        if (flag is False and filtered_value is False):
+        good_status_flag = status_flags_handler(item['Value'])
+        
+        if previous_good_status_flag and not good_status_flag:
             status_flags.append(item)
-            flag = True
-            if i == len(data_json['TimeSeriesDataPoints']) - 1:
+            previous_good_status_flag = False
+        elif not previous_good_status_flag:
+            if good_status_flag:
+                status_flags.append(previous_status_flag)
+                previous_good_status_flag = True
+            elif item['Value'] != previous_status_flag['Value']:
+                status_flags.append(previous_status_flag)
                 status_flags.append(item)
-                return status_flags
-        elif (flag is True and filtered_value is True):
-            status_flags.append(current_status_flags)
-            flag = False
-        elif (flag is True and value != current_status_flags['Value']):
-            status_flags.append(current_status_flags)
-            status_flags.append(item)
-            if i == len(data_json['TimeSeriesDataPoints']) - 1:
+        
+        previous_status_flag = item
+        
+        if i == len(data_json['TimeSeriesDataPoints']) - 1:
+            if not previous_good_status_flag:
                 status_flags.append(item)
-                return status_flags
-        elif (flag is True and i == len(data_json['TimeSeriesDataPoints']) - 1):
-            status_flags.append(item)
-        current_status_flags = item
+    
     return status_flags
