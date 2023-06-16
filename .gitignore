@@ -2,7 +2,7 @@ venv/
 vscode/
 htmlcov/
 __pycache__
-.vscode
+.vscode/
 data/
 !data/model.xlsx
 .coverage
