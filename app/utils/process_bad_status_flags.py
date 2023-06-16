@@ -1,6 +1,6 @@
 from .status_flags_handler import status_flags_handler
 
-def process_data(data_json):
+def process_bad_status_flags(data_json):
     status_flags = []
     previous_status_flag = None
     previous_good_status_flag = True

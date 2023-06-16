@@ -4,7 +4,7 @@ import requests
 import json
 
 from datetime import datetime, timedelta
-from app.utils.process_data import process_data
+from app.utils.process_bad_status_flags import process_bad_status_flags
 from app.utils.excels.export_data_into_excel import export_data_into_excel
 from app.utils.excels.create_excel_file import create_excel_file
 from app.utils.elapsed_time import elapsed_time
@@ -37,7 +37,7 @@ for item in ppa_status_flags[server_name]['ppa']:
     if response.status_code == REQUEST_SUCCEEDED:
         data = response.text
         data_json = json.loads(data)
-        status_flags = process_data(data_json)
+        status_flags = process_bad_status_flags(data_json)
         print(f'[{pmu.upper()}] status_flags: {status_flags}')
         create_excel_file(date, server_name)
         export_data_into_excel(
