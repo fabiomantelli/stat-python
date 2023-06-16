@@ -1,6 +1,6 @@
 import datetime
 
-from utils.convert_decimal_to_binary import convert_decimal_to_binary
+from app.utils.convert_decimal_to_binary import convert_decimal_to_binary
 from .format_time import format_time
 from .get_time_duration import get_time_duration
 

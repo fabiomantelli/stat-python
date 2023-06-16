@@ -1,5 +1,5 @@
 import unittest
-from utils.good_status_flags import good_status_flags
+from app.utils.good_status_flags import good_status_flags
 
 class TestGoodStatusFlags(unittest.TestCase):
     

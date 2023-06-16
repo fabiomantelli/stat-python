@@ -1,5 +1,5 @@
 import unittest
-from utils.process_data import process_data
+from app.utils.process_data import process_data
 
 class TestProcessData(unittest.TestCase):
     
@@ -9,7 +9,6 @@ class TestProcessData(unittest.TestCase):
         }
         result = process_data(data)
         self.assertEqual(result, [])
-    
     
     def test_process_data_with_no_bad_status_flags(self):
         data = {

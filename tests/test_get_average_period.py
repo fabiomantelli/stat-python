@@ -2,7 +2,7 @@ import unittest
 from unittest import mock
 from datetime import datetime, timedelta, time
 
-from utils.excel_functions.get_average_period import get_average_period
+from app.utils.excels.get_average_period import get_average_period
 
 class TestGetAveragePeriod(unittest.TestCase):
 

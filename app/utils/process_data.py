@@ -1,4 +1,4 @@
-from utils.good_status_flags import good_status_flags
+from .good_status_flags import good_status_flags
 
 
 def process_data(data_json):
