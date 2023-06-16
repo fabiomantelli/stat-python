@@ -1,6 +1,5 @@
 import datetime
 
-
 def get_time_duration(start_time, end_time):
     parsed_start_time = datetime.datetime.strptime(
         start_time, "%Y-%m-%d %H:%M:%S.%f")

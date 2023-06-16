@@ -11,5 +11,4 @@ def get_total_duration_of_status_flags(worksheet):
             time_delta = datetime.timedelta(hours=time_value.hour, minutes=time_value.minute,
                                             seconds=time_value.second, microseconds=time_value.microsecond)
             total_duration += time_delta
-
     return total_duration
