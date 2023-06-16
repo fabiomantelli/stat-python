@@ -5,7 +5,7 @@ def process_data(data_json):
     previous_status_flag = None
     previous_good_status_flag = True
     
-    for i, item in enumerate(data_json['TimeSeriesDataPoints']):
+    for item in data_json['TimeSeriesDataPoints']:
         good_status_flag = status_flags_handler(item['Value'])
         
         if previous_good_status_flag and not good_status_flag:
@@ -20,9 +20,8 @@ def process_data(data_json):
                 status_flags.append(item)
         
         previous_status_flag = item
-        
-        if i == len(data_json['TimeSeriesDataPoints']) - 1:
-            if not previous_good_status_flag:
-                status_flags.append(item)
+    
+    if not previous_good_status_flag:
+        status_flags.append(item)
     
     return status_flags
