@@ -1,6 +1,7 @@
 ppa_status_flags = {
     'brazil': {
         'ip': '150.162.19.214',
+        'port': '6152',
         'ppa': [
             {'id': 2, 'pmu': 'ufpa', 'statusFlags': 159},
             {'id': 3, 'pmu': 'unifei', 'statusFlags': 204},
@@ -34,11 +35,14 @@ ppa_status_flags = {
     },
     'ons_pdcmi_bsb': {
         'ip': '192.168.253.21',
+        'port': '6152',
         'ppa': [
             {'id': 11704, 'pmu': 'CEAUT_500_PM_01',
                 'statusFlags': 3902, 'agent': 'ARGO'},
+            # {'id': 11714, 'pmu': 'CEPED_500_PM_01',
+            #     'statusFlags': 4036, 'agent': 'ARGO'},
             {'id': 11714, 'pmu': 'CEPED_500_PM_01',
-                'statusFlags': 4036, 'agent': 'ARGO'},
+                'statusFlags': 4938, 'agent': 'ARGO'},
             {'id': 11423, 'pmu': 'RSNSR_525_PM_04',
                 'statusFlags': 1543, 'agent': 'ELETROSUL'},
             {'id': 11428, 'pmu': 'SCCNO_525_PM_08',
@@ -53,8 +57,31 @@ ppa_status_flags = {
                 'statusFlags': 3586, 'agent': 'TBE'},
         ]
     },
+    'ons_pdcmi_rj': {
+        'ip': '192.168.254.21',
+        'port': '6156',
+        'ppa': [
+            {'id': 11704, 'pmu': 'CEAUT_500_PM_01',
+                'statusFlags': 4804, 'agent': 'ARGO'},
+            {'id': 11714, 'pmu': 'CEPED_500_PM_01',
+                'statusFlags': 4938, 'agent': 'ARGO'},
+            {'id': 11423, 'pmu': 'RSNSR_525_PM_04',
+                'statusFlags': 1784, 'agent': 'ELETROSUL'},
+            {'id': 11428, 'pmu': 'SCCNO_525_PM_08',
+                'statusFlags': 1851, 'agent': 'ELETROSUL'},
+            {'id': 14202, 'pmu': 'PIQND_500_PM_07',
+                'statusFlags': 11515, 'agent': 'RIALMA'},
+            {'id': 10709, 'pmu': 'BAPOT_500_PM_03',
+                'statusFlags': 4616, 'agent': 'TBE'},
+            {'id': 10707, 'pmu': 'PATC_500_PM_07',
+                'statusFlags': 4535, 'agent': 'TBE'},
+            {'id': 10701, 'pmu': 'SCCNO_525_PM_03',
+                'statusFlags': 4440, 'agent': 'TBE'},
+        ]
+    },
     'pdc_aws': {
         'ip': '54.207.18.19',
+        'port': '6152',
         'ppa': [
             {'id': 3, 'pmu': 'unifei', 'statusFlags': 1312},
             {'id': 17, 'pmu': 'ufma', 'statusFlags': 718},
