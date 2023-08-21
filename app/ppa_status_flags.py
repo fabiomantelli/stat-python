@@ -39,10 +39,8 @@ ppa_status_flags = {
         'ppa': [
             {'id': 11704, 'pmu': 'CEAUT_500_PM_01',
                 'status_flags_ppa': 3902, 'agent': 'ARGO'},
-            # {'id': 11714, 'pmu': 'CEPED_500_PM_01',
-            #     'status_flags_ppa': 4036, 'agent': 'ARGO'},
             {'id': 11714, 'pmu': 'CEPED_500_PM_01',
-                'status_flags_ppa': 4938, 'agent': 'ARGO'},
+                'status_flags_ppa': 4036, 'agent': 'ARGO'},
             {'id': 11423, 'pmu': 'RSNSR_525_PM_04',
                 'status_flags_ppa': 1543, 'agent': 'ELETROSUL'},
             {'id': 11428, 'pmu': 'SCCNO_525_PM_08',

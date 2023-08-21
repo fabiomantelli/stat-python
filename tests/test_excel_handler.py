@@ -1,7 +1,7 @@
 import unittest
 import os
 
-from app.utils.excel_handler import ExcelHandler
+from app.excel_handler import ExcelHandler
 
 class TestExcelHandler(unittest.TestCase):
     def setUp(self):

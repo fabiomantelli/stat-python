@@ -3,8 +3,9 @@ vscode/
 htmlcov/
 __pycache__
 .vscode/
-exports/
-!exports/model*.xlsx
+outputs/
+templates/
+!templates/model*.xlsx
 .coverage
 .DS_Store
 **/.DS_Store

@@ -1,6 +1,6 @@
 import unittest
 
-from app.utils.get_servers import get_server
+from app.get_servers import get_server
 
 class TestGetServer(unittest.TestCase):
 

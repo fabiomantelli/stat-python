@@ -7,12 +7,11 @@ from openpyxl.styles.alignment import Alignment
 import datetime
 from collections import Counter
 
-from app.utils.convert_decimal_to_binary import convert_decimal_to_binary
-from .format_time import format_time
-from .get_time_duration import get_time_duration
-from app.interfaces.excel_gateway import ExcelGatewayInterface
+from app.utilities import convert_decimal_to_binary
+from .utilities import format_time
+from .utilities import get_time_duration
 
-class ExcelHandler(ExcelGatewayInterface):
+class ExcelHandler():
 
     def __init__(self, date: datetime, server_name: str):
         self.date = date
@@ -21,9 +20,9 @@ class ExcelHandler(ExcelGatewayInterface):
     def create_excel_file(self, date, server_name):
         month, day, year = self.date.split("-")
         excel_file_name = f"{year}_{month}_{self.server_name}_status_flags.xlsx"
-        path = os.path.join("./exports/", excel_file_name)
+        path = os.path.join("./outputs/", excel_file_name)
         if not os.path.exists(path):
-            source_path = f"./exports/model_{self.server_name}.xlsx"
+            source_path = f"./templates/model_{self.server_name}.xlsx"
             destination_path = path
             shutil.copy(source_path, destination_path)
             os.rename(destination_path, path)
@@ -33,7 +32,7 @@ class ExcelHandler(ExcelGatewayInterface):
         if not status_flags:
             return
         try:
-            excel_file_name = f"./exports/{year}_{month}_{server_name}_status_flags.xlsx"
+            excel_file_name = f"./outputs/{year}_{month}_{server_name}_status_flags.xlsx"
             workbook = openpyxl.load_workbook(excel_file_name)
         except FileNotFoundError:
             workbook = Workbook()

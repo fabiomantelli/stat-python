@@ -1,5 +1,5 @@
 import unittest
-from app.utils.convert_decimal_to_binary import convert_decimal_to_binary
+from app.utilities import convert_decimal_to_binary
 
 class TestConvertDecimalToBinary(unittest.TestCase):
 

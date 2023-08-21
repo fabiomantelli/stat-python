@@ -1,5 +1,5 @@
 import unittest
-from app.utils.set_datetime import set_datetime
+from app.utilities import set_datetime
 
 class TestSetDate(unittest.TestCase):
     

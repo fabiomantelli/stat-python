@@ -1,4 +1,4 @@
-from app.utils.ppa_status_flags import ppa_status_flags
+from app.ppa_status_flags import ppa_status_flags
 
 def get_server(server_name):
     try:

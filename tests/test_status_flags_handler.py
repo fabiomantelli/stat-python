@@ -1,5 +1,5 @@
 import unittest
-from app.utils.status_flags_handler import status_flags_handler
+from app.utilities import status_flags_handler
 
 class TestGoodStatusFlagsHandler(unittest.TestCase):
     
